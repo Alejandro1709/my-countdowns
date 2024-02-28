@@ -20,7 +20,7 @@ function Layout({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
-      <main className="container flex-1">{children}</main>
+      <main className="container my-6 flex-1 lg:my-10">{children}</main>
     </div>
   );
 }
