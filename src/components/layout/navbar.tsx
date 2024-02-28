@@ -3,6 +3,8 @@ import ThemeToggler from "../theme/theme-toggler";
 import { useSession } from "next-auth/react";
 import AccountButton from "../account/account-button";
 import LoginButton from "./login-button";
+import { Button } from "../ui/button";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 function Navbar() {
   const { data: session } = useSession();
@@ -18,7 +20,12 @@ function Navbar() {
         <div className="flex flex-row gap-3">
           <ThemeToggler />
           {session?.user ? (
-            <AccountButton session={session} />
+            <div className="flex flex-row gap-3">
+              <Button variant="outline" size="icon">
+                <PlusIcon />
+              </Button>
+              <AccountButton session={session} />
+            </div>
           ) : (
             <LoginButton />
           )}

@@ -19,9 +19,7 @@ function AccountButton({ session }: { session: Session }) {
       <DropdownMenuContent>
         <DropdownMenuLabel>{session.user.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {/* <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem> */}
+        {/* <DropdownMenuItem>Profile</DropdownMenuItem> */}
         <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

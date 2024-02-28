@@ -15,6 +15,18 @@ datasource db {
 }
 
 // Necessary for Next auth
+
+model Countdown {
+    id         String   @id @default(cuid())
+    title      String
+    slug       String
+    finished   Boolean  @default(false)
+    targetDate DateTime
+    createdAt  DateTime @default(now())
+    user       User?    @relation(fields: [userId], references: [id])
+    userId     String?
+}
+
 model Account {
     id                String  @id @default(cuid())
     userId            String
@@ -42,11 +54,12 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String      @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?     @unique
     emailVerified DateTime?
     image         String?
+    countdowns    Countdown[]
     accounts      Account[]
     sessions      Session[]
 }
