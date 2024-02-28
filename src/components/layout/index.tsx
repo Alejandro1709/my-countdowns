@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Navbar from "./navbar";
 
 type LayoutProps = {
   title?: string;
@@ -18,8 +19,8 @@ function Layout({
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <nav className="h-16 border-b bg-white">NAVBAR</nav>
-      <main className="flex-1">{children}</main>
+      <Navbar />
+      <main className="container flex-1">{children}</main>
     </div>
   );
 }
