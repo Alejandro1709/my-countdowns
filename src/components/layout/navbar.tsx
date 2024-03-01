@@ -23,6 +23,7 @@ function Navbar() {
             <div className="flex flex-row gap-3">
               <Button variant="outline" size="icon">
                 <PlusIcon />
+                <span className="sr-only">Add</span>
               </Button>
               <AccountButton session={session} />
             </div>
