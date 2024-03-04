@@ -1,6 +1,6 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import ThemeToggler from "../theme/theme-toggler";
-import { useSession } from "next-auth/react";
 import AccountButton from "../account/account-button";
 import LoginButton from "./login-button";
 import { Button } from "../ui/button";
