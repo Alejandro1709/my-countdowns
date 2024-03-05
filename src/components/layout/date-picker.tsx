@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useCalendarStore } from "stores/calendar-store";
+import { useCalendarStore } from "@/stores/calendar-store";
 
 export function DatePicker() {
   const date = useCalendarStore((state) => state.date);

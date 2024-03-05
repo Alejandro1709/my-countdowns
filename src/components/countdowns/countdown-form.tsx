@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import DatePicker from "../layout/date-picker";
-import { useCalendarStore } from "stores/calendar-store";
+import { handleCreateCountdown } from "@/services/countdowns";
 
 const formSchema = z.object({
   title: z.string().min(2).max(100),
@@ -21,8 +21,6 @@ const formSchema = z.object({
 });
 
 function CountdownForm() {
-  const date = useCalendarStore((state) => state.date);
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,8 +29,8 @@ function CountdownForm() {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values, date);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await handleCreateCountdown(values);
   };
 
   return (
