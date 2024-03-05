@@ -3,8 +3,7 @@ import Link from "next/link";
 import ThemeToggler from "../theme/theme-toggler";
 import AccountButton from "../account/account-button";
 import LoginButton from "./login-button";
-import { Button } from "../ui/button";
-import { PlusIcon } from "@radix-ui/react-icons";
+import CountdownDialog from "../countdowns/countdown-dialog";
 
 function Navbar() {
   const { data: session } = useSession();
@@ -21,10 +20,7 @@ function Navbar() {
           <ThemeToggler />
           {session?.user ? (
             <div className="flex flex-row gap-3">
-              <Button variant="outline" size="icon">
-                <PlusIcon />
-                <span className="sr-only">Add</span>
-              </Button>
+              <CountdownDialog />
               <AccountButton session={session} />
             </div>
           ) : (
