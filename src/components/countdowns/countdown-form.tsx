@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import DatePicker from "../layout/date-picker";
 import { handleCreateCountdown } from "@/services/countdowns";
+import { useCountdownState } from "@/stores/countdown-store";
+import { useMutation } from "@tanstack/react-query";
 
 const formSchema = z.object({
   title: z.string().min(2).max(100),
@@ -21,6 +23,17 @@ const formSchema = z.object({
 });
 
 function CountdownForm() {
+  const countdowns = useCountdownState((state) => state.countdowns);
+  const setCountdowns = useCountdownState((state) => state.setCountdowns);
+
+  const { mutate } = useMutation({
+    mutationFn: handleCreateCountdown,
+    onSuccess: (data) => {
+      console.log("yaaaay", data);
+      setCountdowns([...countdowns, data]);
+    },
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,7 +43,8 @@ function CountdownForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await handleCreateCountdown(values);
+    const cd = await handleCreateCountdown(values);
+    mutate(cd);
   };
 
   return (

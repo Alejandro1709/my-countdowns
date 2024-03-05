@@ -9,7 +9,7 @@ function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <nav className="flex h-16 items-center justify-center border-b bg-white dark:bg-zinc-950">
+    <nav className="sticky top-0 z-20 flex h-16 items-center justify-center border-b bg-white dark:bg-zinc-950">
       <div className="container flex items-center justify-between">
         <Link href="/">
           <h2 className="text-xl font-semibold dark:text-white lg:text-2xl">
