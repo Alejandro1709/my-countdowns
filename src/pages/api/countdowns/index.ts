@@ -9,17 +9,19 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   if (req.method === "POST") {
-    const { title, targetDate } = req.body as {
-      title: string;
-      targetDate: Date;
-    };
-
     const session = await getServerSession(req, res, authOptions);
 
     if (!session) {
       res.status(401).json({ message: "You must be logged in." });
       return;
     }
+
+    const { title, targetDate } = req.body as {
+      title: string;
+      targetDate: Date;
+    };
+
+    console.log(title, targetDate);
 
     const newCountdown = await db.countdown.create({
       data: {
