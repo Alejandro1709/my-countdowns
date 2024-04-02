@@ -16,6 +16,7 @@ import DatePicker from "../layout/date-picker";
 import { handleCreateCountdown } from "@/services/countdowns";
 import { useCountdownState } from "@/stores/countdown-store";
 import { useMutation } from "@tanstack/react-query";
+import { useCalendarStore } from "@/stores/calendar-store";
 
 const formSchema = z.object({
   title: z.string().min(2).max(100),
@@ -25,6 +26,8 @@ const formSchema = z.object({
 function CountdownForm() {
   const countdowns = useCountdownState((state) => state.countdowns);
   const setCountdowns = useCountdownState((state) => state.setCountdowns);
+
+  const date = useCalendarStore((state) => state.date);
 
   const { mutate } = useMutation({
     mutationFn: handleCreateCountdown,
@@ -43,7 +46,7 @@ function CountdownForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const cd = await handleCreateCountdown(values);
+    const cd = await handleCreateCountdown({ ...values, targetDate: date });
     mutate(cd);
   };
 
